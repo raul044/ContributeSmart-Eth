@@ -1,0 +1,28 @@
+// Contract deployment and testing
+
+truffle migrate
+truffle test
+truffle console
+
+------------------------------------------------
+// Issuer side
+
+let accounts = await web3.eth.getAccounts()
+accounts
+
+let instance = await SmartContribute.deployed()
+
+let result = await instance.fundIssuer("gitIssuer1", {from: accounts[0], value: 1000000000000000000})
+result
+
+result = await instance.getIssuerFunds("gitIssuer1")
+
+// TODO: change value
+result = await instance.registerIssue("issue1", "gitIssuer1", 5)
+result = await instance.getIssueBounties("issue1")
+
+// Hunter side
+await instance.registerHunter("hunterId1", {from: accounts[1]})
+await instance.claimBounty("issue1", "hunterId1")
+
+// 1ETH = 1000000000000000000 (18 0s)
