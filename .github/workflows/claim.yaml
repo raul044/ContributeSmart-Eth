@@ -36,4 +36,4 @@ jobs:
           run: npm install
 
         - name: Fund Issuer
-          run: truffle exec scripts/claimBounty.js --network remote_ganache
+          run: truffle exec claimBounty.js --network remote_ganache
