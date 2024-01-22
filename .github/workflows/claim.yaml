@@ -13,7 +13,8 @@ jobs:
       runs-on: ubuntu-latest
       env:
         GITHUB_USER: ${{ github.event.pull_request.user.login }}
-        GITHUB_ISSUE_HREF: ${{ github.event.pull_request.body | grep -o -E 'Closes #[0-9]+' | sed -n '1s/Closes #//p' }}
+        GITHUB_ISSUE_HREF: |
+          $(echo "${{ github.event.pull_request.body }}" | grep -o -E 'Closes #[0-9]+' | sed -n '1s/Closes #//p')
 
       steps:
         - name: Log GitHub context
