@@ -16,6 +16,11 @@ jobs:
         GITHUB_ISSUE_HREF: ${{ github.event.pull_request._links.issue.href }}
 
       steps:
+        - name: Log GitHub context
+          env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
+          run: echo "$GITHUB_CONTEXT"
+
         - name: Checkout Code
           uses: actions/checkout@v2
 
