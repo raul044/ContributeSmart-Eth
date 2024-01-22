@@ -13,7 +13,7 @@ jobs:
       runs-on: ubuntu-latest
       env:
         GITHUB_USER: ${{ github.event.pull_request.user.login }}
-        GITHUB_ISSUE_HREF: ${{ github.event.pull_request._links.issue.href }}
+        GITHUB_ISSUE_HREF: ${{ github.event.pull_request.body | grep -o -E 'Closes #[0-9]+' | sed -n '1s/Closes #//p' }}
 
       steps:
         - name: Log GitHub context
@@ -34,9 +34,6 @@ jobs:
 
         - name: Install Dependencies
           run: npm install
-
-        - name: Compile Contract
-          run: truffle compile
 
         - name: Claim Bounty
           run: truffle exec claimBounty.js --network remote_ganache
