@@ -34,3 +34,4 @@ await instance.claimBounty("issue1", "hunterId1")
 // Comment for test 5
 // Comment for test 6
 // Comment for test 7
+// Comment for test 8
