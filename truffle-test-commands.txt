@@ -12,13 +12,13 @@ accounts
 
 let instance = await SmartContribute.deployed()
 
-let result = await instance.fundIssuer("gitIssuer1", {from: accounts[0], value: 1000000000000000000})
+let result = await instance.fundIssuer("gitIssuer1", {from: accounts[0], value: "1000000000000000000"})
 result
 
 result = await instance.getIssuerFunds("gitIssuer1")
 
 // TODO: change value
-result = await instance.registerIssue("issue1", "gitIssuer1", 5)
+result = await instance.registerIssue("issue1", "gitIssuer1", "50000000000000000")
 result = await instance.getIssueBounties("issue1")
 
 // Hunter side

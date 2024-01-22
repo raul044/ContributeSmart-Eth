@@ -46,7 +46,12 @@ module.exports = {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
-    }
+    },
+    remote_ganache: {
+      host: "a2dd-95-76-249-14.ngrok-free.app",
+      port: 80,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+     },
     //
     // goerli: {
     //   provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${infuraProjectId}`),

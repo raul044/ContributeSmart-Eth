@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract SmartContribute {
+    // TODO: Add arrays to view in Ganache. Hash keys cannot be retrieved in UI
     mapping(string => address) issuerWallets;
     mapping(string => uint256) issuerFunds;
     mapping(string => address) hunterWallets;
@@ -39,6 +40,7 @@ contract SmartContribute {
         hunterWallets[gitId] = caller;
     }
 
+    // TODO: remove claimed bounties
     function claimBounty(string memory issueId, string memory hunterGitId) external {
         address hunter = hunterWallets[hunterGitId];
         uint256 bounty = issueBounties[issueId];

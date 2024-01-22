@@ -1,0 +1,34 @@
+name: Claim CI on PR closed
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  commented_grant:
+      name: Grant the bounty
+      if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
+      runs-on: ubuntu-latest
+      env:
+        GITHUB_USER: ${{ github.event.pull_request.user.login }}
+        GITHUB_ISSUE_HREF: ${{ github.event.pull_request._links.issue }}
+
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+
+        - name: Install Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+
+        - name: Install Truffle
+          run: npm install -g truffle
+
+        - name: Install Dependencies
+          run: npm install
+
+        - name: Fund Issuer
+          run: truffle exec scripts/claimBounty.js --network remote_ganache
