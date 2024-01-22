@@ -35,5 +35,8 @@ jobs:
         - name: Install Dependencies
           run: npm install
 
-        - name: Fund Issuer
+        - name: Compile Contract
+          run: truffle compile
+
+        - name: Claim Bounty
           run: truffle exec claimBounty.js --network remote_ganache
