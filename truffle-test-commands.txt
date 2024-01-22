@@ -26,3 +26,5 @@ await instance.registerHunter("hunterId1", {from: accounts[1]})
 await instance.claimBounty("issue1", "hunterId1")
 
 // 1ETH = 1000000000000000000 (18 0s)
+
+// Comment for test 1
