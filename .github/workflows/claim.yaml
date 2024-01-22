@@ -13,10 +13,14 @@ jobs:
       runs-on: ubuntu-latest
       env:
         GITHUB_USER: ${{ github.event.pull_request.user.login }}
-        GITHUB_ISSUE_HREF: |
-          $(echo "${{ github.event.pull_request.body }}" | grep -o -E 'Closes #[0-9]+' | sed -n '1s/Closes #//p')
 
       steps:
+        - name: Extract issue ID
+          id: extract_issue_id
+          run: |
+            export GITHUB_ISSUE_HREF=$(echo "${{ github.event.pull_request.body }}" | grep -o -E 'Closes #[0-9]+' | sed -n '1s/Closes #//p')
+            echo "GITHUB_ISSUE_HREF=$GITHUB_ISSUE_HREF" >> $GITHUB_ENV
+
         - name: Log GitHub context
           env:
             GITHUB_CONTEXT: ${{ toJson(github) }}
