@@ -13,6 +13,7 @@ jobs:
       runs-on: ubuntu-latest
       env:
         GITHUB_USER: ${{ github.event.pull_request.user.login }}
+        NGROK_SERVER: ${{ vars.NGROK_SERVER }}
 
       steps:
         - name: Extract issue ID
