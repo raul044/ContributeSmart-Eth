@@ -23,6 +23,7 @@
 // const infuraProjectId = process.env["INFURA_PROJECT_ID"];
  
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
+const ngrok_server = process.env["NGROK_SERVER"];
 
 module.exports = {
   /**
@@ -48,7 +49,7 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
     remote_ganache: {
-      host: "a2dd-95-76-249-14.ngrok-free.app",
+      host: ngrok_server,
       port: 80,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
      },
