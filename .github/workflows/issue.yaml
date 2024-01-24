@@ -10,7 +10,6 @@ jobs:
     environment: Test-env
     env:
       GITHUB_USER: ${{ github.event.comment.user.login }}
-      GITHUB_ISSUE_ID: ${{ github.event.issue.id }}
       NGROK_SERVER: ${{ vars.NGROK_SERVER }}
 
     steps:
@@ -31,6 +30,12 @@ jobs:
           echo "The bounty: $GITHUB_ISSUE_BOUNTY"
           echo "GITHUB_ISSUE_BOUNTY=$GITHUB_ISSUE_BOUNTY" >> $GITHUB_ENV
 
+      - name: Extract issue ID
+        id: extract_issue_id
+        run: |
+          export GITHUB_ISSUE_HREF=$(echo "${{ github.event.comment.issue_url }}" | awk -F'/' '{print $NF}')
+          echo "GITHUB_ISSUE_HREF=$GITHUB_ISSUE_HREF" >> $GITHUB_ENV
+
       - name: Log GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -50,5 +55,5 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Claim Bounty
+      - name: Register Issue
         run: truffle exec addBounty.js --network remote_ganache
