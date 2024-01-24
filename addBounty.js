@@ -12,7 +12,7 @@ module.exports = async function (callback) {
     const smartContribute = await SmartContribute.deployed();
 
     const bountyWei = web3.utils.toWei(bounty, 'ether');
-    let ethBounty = BigInt(bountyWei);
+    const ethBounty = web3.utils.toBN(bountyWei);
     console.log('Bounty:', ethBounty.toString());
 
     const result = await smartContribute.registerIssue(issueId, githubUser, ethBounty.toString());
