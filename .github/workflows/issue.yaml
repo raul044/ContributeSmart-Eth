@@ -1,0 +1,54 @@
+name: Issue CI
+
+on: issue_comment
+
+jobs:
+  commented_set:
+    name: Add a bounty
+    if: ${{ startsWith(github.event.comment.body, '/add_bounty') }}
+    runs-on: ubuntu-latest
+    environment: Test-env
+    env:
+      GITHUB_USER: ${{ github.event.comment.user.login }}
+      GITHUB_ISSUE_ID: ${{ github.event.issue.id }}
+      NGROK_SERVER: ${{ vars.NGROK_SERVER }}
+
+    steps:
+      - name: Check comment is "/add_bounty bounty"
+        uses: actions-ecosystem/action-regex-match@v2.0.2
+        id: exact_match
+        with:
+          text: ${{ github.event.comment.body }}
+          regex: '^\/add_bounty (\d+)$'
+
+      - name: Add bounty
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_ISSUE_BOUNTY: ${{ steps.exact_match.outputs.group1 }}
+        if: ${{ steps.exact_match.outputs.match != '' }}
+        run: |
+          echo "The bounty: $GITHUB_ISSUE_BOUNTY"
+          echo "GITHUB_ISSUE_BOUNTY=$GITHUB_ISSUE_BOUNTY" >> $GITHUB_ENV
+
+      - name: Log GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'
+
+      - name: Install Truffle
+        run: npm install -g truffle
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Claim Bounty
+        run: truffle exec addBounty.js --network remote_ganache
