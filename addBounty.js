@@ -6,8 +6,6 @@ const githubUser = process.env.GITHUB_USER
 const issueId = process.env.GITHUB_ISSUE_HREF
 const bounty = process.env.GITHUB_ISSUE_BOUNTY
 
-const ethMul = BigInt("1000000000000000000");
-
 module.exports = async function (callback) {
   try {
     // Change to remote

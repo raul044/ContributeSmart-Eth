@@ -19,7 +19,7 @@ jobs:
         id: exact_match
         with:
           text: ${{ github.event.comment.body }}
-          regex: '^\/add_bounty (\d+)$'
+          regex: '^\/add_bounty (\d+(\.\d+)?)$'
 
       - name: Add bounty
         shell: bash
