@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "chai": "^5.0.0",
-    "remix-tests": "^0.1.34"
-  }
-}
