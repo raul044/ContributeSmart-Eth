@@ -26,6 +26,9 @@ $ cd client
 $ npm start
 ```
 
+Install the MetaMask extension for chrome and add Ganache as a new network (chain ID 1337).
+After you can add accounts from Ganache using their private key.
+
 From there, follow the instructions on the hosted React app. It will walk you through using Truffle and Ganache to deploy the `SmartContribute` contract, making calls to it, and sending transactions to change the contract's state.
 
 ## FAQ
