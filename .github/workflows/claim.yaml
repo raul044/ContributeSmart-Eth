@@ -36,6 +36,9 @@ jobs:
           with:
             node-version: '21'
 
+        - name: Change truffle dir
+          run: cd truffle/
+
         - name: Install Truffle
           run: npm install -g truffle
 
@@ -43,4 +46,4 @@ jobs:
           run: npm install
 
         - name: Claim Bounty
-          run: truffle exec truffle/scripts/claimBounty.js --network remote_ganache
+          run: truffle exec scripts/claimBounty.js --network remote_ganache
