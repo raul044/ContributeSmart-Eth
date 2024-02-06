@@ -5,24 +5,28 @@ import Footer from "./components/Footer";
 import Issuer from "./components/Issuer";
 import Hunter from "./components/Hunter";
 import Bounties from "./components/Bounties";
+import './styles.css'; // make sure to import the CSS file
 
 function App() {
   return (
     <EthProvider>
       <div id="App">
+        <Intro />
         <div className="container">
-          <Intro />
-          <hr />
-          <Issuer />
-          <hr />
-          <Hunter />
-          <hr />
-          <Bounties />
-          <hr />
-          <Demo />
-          <hr />
-          <Footer />
+          <div className="component-box Issuer">
+            <Issuer />
+          </div>
+          <div className="component-box Hunter">
+            <Hunter />
+          </div>
+          <div className="component-box Bounties">
+            <Bounties />
+          </div>
+          <div className="component-box Demo">
+            <Demo />
+          </div>
         </div>
+        <Footer />
       </div>
     </EthProvider>
   );

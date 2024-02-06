@@ -6,8 +6,7 @@ function Intro() {
   return (
     <>
       <Welcome />
-      <Tree />
-      <Desc />
+     
     </>
   );
 }

@@ -5,11 +5,8 @@ function Link({ uri, text }) {
 function Footer() {
   return (
     <footer>
-      <h2>More resources</h2>
-      <Link uri={"https://trufflesuite.com"} text={"Truffle"} />
-      <Link uri={"https://reactjs.org"} text={"React"} />
-      <Link uri={"https://soliditylang.org"} text={"Solidity"} />
-      <Link uri={"https://ethereum.org"} text={"Ethereum"} />
+      <h2 style={{textAlign: "center", color:"white"}}> Trade your skill </h2>
+      
     </footer >
   );
 }
