@@ -47,4 +47,6 @@ jobs:
             npm install
 
         - name: Claim Bounty
-          run: truffle exec truffle/scripts/claimBounty.js --network remote_ganache
+          run: |
+            cd truffle/
+            truffle exec scripts/claimBounty.js --network remote_ganache
