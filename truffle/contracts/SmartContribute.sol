@@ -3,14 +3,19 @@ pragma solidity ^0.8.0;
 
 contract SmartContribute {
     // TODO: Add arrays to view in Ganache. Hash keys cannot be retrieved in UI
-    mapping(string => address) issuerWallets;
-    mapping(string => uint256) issuerFunds;
-    mapping(string => address) hunterWallets;
-    mapping(string => uint256) issueBounties;
+    address public minter;
+    mapping(string => address) private issuerWallets;
+    mapping(string => uint256) public issuerFunds;
+    mapping(string => address) private hunterWallets;
+    mapping(string => uint256) public issueBounties;
 
-    event UpdateEvent(address indexed from, uint256 updatedFirst, uint256 updatedSecond);
+    event FundsAdded(address indexed by, uint256 amount);
+    event FundsRetracted(address indexed by, uint256 amount);
 
-    // Maybe return total value?
+    constructor() {
+        minter = msg.sender;
+    }
+
     function fundIssuer(string memory gitId) external payable {
         // Save issuer wallet
         address caller = msg.sender;
@@ -25,6 +30,8 @@ contract SmartContribute {
         }
         
         issuerFunds[gitId] = paymentAmount;
+
+        emit FundsAdded(address(this), msg.value);
     }
 
     function registerIssue(string memory issueId, string memory gitId, uint256 bounty) external {
@@ -62,6 +69,8 @@ contract SmartContribute {
         payable(hunter).transfer(bounty);
 
         issueBounties[issueId] = 0;
+
+        emit FundsRetracted(hunter, bounty);
     }
 
     function claimFund(string memory gitId) external {
@@ -74,21 +83,12 @@ contract SmartContribute {
         payable(wallet).transfer(availableFund);
         
         issuerFunds[gitId] = 0;
+
+        emit FundsRetracted(wallet, availableFund);
     }
 
-    function getIssueBounties(string memory issueId) external view returns (uint256) {
-        return issueBounties[issueId];
-    }
-
-    function getIssuerFunds(string memory gitId) external view returns (uint256) {
-        return issuerFunds[gitId];
-    }
-
-    function getIssuerWallets(string memory gitId) external view returns (address) {
-        return issuerWallets[gitId];
-    }
-
-    function getHunterWallets(string memory gitId) external view returns (address) {
-        return hunterWallets[gitId];
+    function terminate() public {
+        require(msg.sender == minter, "Only the minter can terminate the contract!");
+        selfdestruct(payable(minter));
     }
 }

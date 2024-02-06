@@ -11,7 +11,7 @@ function Bounties() {
   const [bounty, setBounty] = useState();
 
   const getBounty = async () => {
-    const result = await state.contract.methods.getIssueBounties(bountyID).call({ from: state.accounts[0] });;
+    const result = await state.contract.methods.issueBounties(bountyID).call({ from: state.accounts[0] });;
     setBounty(isNaN(result) ? 'Invalid output' : state.web3.utils.fromWei(result));
   };
 

@@ -13,7 +13,7 @@ function ContractBtns({ setValue }) {
 
   const read = async () => {
     // const value = await contract.methods.fundIssuer("gitIssuer1").send({from: accounts[0], value: "1000000000000000000"});
-    const funds = await contract.methods.getIssuerFunds("gitIssuer1").call({ from: accounts[0] });
+    const funds = await contract.methods.issuerFunds("gitIssuer1").call({ from: accounts[0] });
     console.log(funds)
     setValue(4);
   };

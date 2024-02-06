@@ -15,7 +15,7 @@ function Issuer() {
   const [funds, setFunds] = useState(null);
 
   const getIssuerFunds = async () => {
-    const result = await state.contract.methods.getIssuerFunds(issuerID).call({ from: state.accounts[0] });;
+    const result = await state.contract.methods.issuerFunds(issuerID).call({ from: state.accounts[0] });;
     setFunds(isNaN(result) ? 'Invalid output' : state.web3.utils.fromWei(result));
   };
 
