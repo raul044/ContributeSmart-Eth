@@ -3,7 +3,7 @@ name: Claim CI on PR closed
 on:
   pull_request:
     branches:
-      - main
+      - ui
     types: [closed]
 
 jobs:
@@ -37,10 +37,16 @@ jobs:
             node-version: '21'
 
         - name: Install Truffle
-          run: npm install -g truffle
+          run: |
+            cd truffle/
+            npm install -g truffle
 
         - name: Install Dependencies
-          run: npm install
+          run: |
+            cd truffle/
+            npm install
 
         - name: Claim Bounty
-          run: truffle exec claimBounty.js --network remote_ganache
+          run: |
+            cd truffle/
+            truffle exec scripts/claimBounty.js --network remote_ganache

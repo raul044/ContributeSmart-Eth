@@ -21,8 +21,8 @@ contract('SmartContribute', (accounts) => {
     await contribute.registerIssue(issueId, issuerGitId, bounty);
 
     // Verify issuer funds and issue bounties
-    const issuerFund = await contribute.getIssuerFunds(issuerGitId);
-    const issueBounty = await contribute.getIssueBounties(issueId);
+    const issuerFund = await contribute.issuerFunds(issuerGitId);
+    const issueBounty = await contribute.issueBounties(issueId);
 
     assert.strictEqual(issuerFund.toString(), '0', 'Issuer fund should be depleted');
     assert.strictEqual(issueBounty.toString(), bounty, 'Issue bounty should match the funded amount');
