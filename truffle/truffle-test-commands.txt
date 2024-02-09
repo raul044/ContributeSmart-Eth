@@ -28,19 +28,3 @@ await instance.claimBounty("issue1", "hunterId1")
 // 1ETH = 1000000000000000000 (18 0s)
 
 // Comment for test 1
-// Comment for test 2
-// Comment for test 3
-// Comment for test 4
-// Comment for test 5
-// Comment for test 6
-// Comment for test 7
-// Comment for test 8
-// Comment for test 9
-// Comment for test 10
-// Comment for test 11
-// Comment for test 12
-// Comment for test 13
-// Comment for test 14
-// Comment for test 15
-// Comment for test 16
-// Comment for test 17
