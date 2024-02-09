@@ -3,7 +3,7 @@ name: Claim CI on PR closed
 on:
   pull_request:
     branches:
-      - ui
+      - main
     types: [closed]
 
 jobs:
