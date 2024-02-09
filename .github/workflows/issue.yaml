@@ -50,10 +50,16 @@ jobs:
           node-version: '21'
 
       - name: Install Truffle
-        run: npm install -g truffle
+        run: |
+            cd truffle/
+            npm install -g truffle
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+            cd truffle/
+            npm install
 
       - name: Register Issue
-        run: truffle exec addBounty.js --network remote_ganache
+        run: |
+            cd truffle/
+            truffle exec scripts/addBounty.js --network remote_ganache
